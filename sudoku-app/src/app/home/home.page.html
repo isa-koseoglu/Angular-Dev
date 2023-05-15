@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Sudoku
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="text-align: center;">
+  <table style="margin:auto">
+    <tr *ngFor="let row of board; let i = index">
+      <td *ngFor="let cell of row; let j = index" >
+        <div *ngIf="BoardReadonlyCheck(i,j) ; else elseBlock">
+          <input type="number"  value="{{gridCreatedFull[i][j]}}" readonly style="background-color: #eeeeee;box-shadow: inset 0px 0px 2px   black;">
+        </div>
+        <ng-template #elseBlock>
+          <input type="number" value="{{board[i][j]}}" #inputxxx  onkeydown="GridFill(inputxxx,i,j)"  >
+        </ng-template>
+      </td>
+    </tr>
+  </table>
+  <ion-button (click)="resetBoard()">Reset</ion-button>
+  <ion-button (click)="checkAnswer()">Check</ion-button>
+  <ion-button (click)="showFull()">Full Show</ion-button>
+</ion-content>
+
+
