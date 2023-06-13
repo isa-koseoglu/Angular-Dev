@@ -11,10 +11,10 @@
     <tr *ngFor="let row of board; let i = index">
       <td *ngFor="let cell of row; let j = index" >
         <div *ngIf="BoardReadonlyCheck(i,j) ; else elseBlock">
-          <input type="number"  value="{{gridCreatedFull[i][j]}}" readonly style="background-color: #eeeeee;box-shadow: inset 0px 0px 2px   black;">
+          <input type="text"  value="{{GridPrintBoardNow(i,j,1)}}" min="1" max="9" readonly style="background-color: #eeeeee;box-shadow: inset 0px 0px 2px   black;">
         </div>
         <ng-template #elseBlock>
-          <input type="number" value="{{board[i][j]}}" #inputxxx  onkeydown="GridFill(inputxxx,i,j)"  >
+          <input type="text" value="{{GridPrintBoardNow(i,j,0)}}" min="1" max="9" #hucre (change)="GridFill(hucre.value,i,j)"  >
         </ng-template>
       </td>
     </tr>

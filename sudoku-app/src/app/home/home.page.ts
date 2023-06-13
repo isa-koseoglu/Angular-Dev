@@ -9,7 +9,6 @@ export class HomePage {
 
   board: string[][]; // Sudoku oyun tahtası matrisi
 
-  size: number = 9; // Sudoku tahtasının boyutu
 
   randomBoardReadonly:string[][]; // Sudoku tahtasının rastgele readonly hücreleri
 
@@ -28,16 +27,31 @@ export class HomePage {
   ];
 
   constructor() {
-    this.board = this.gridBoardEmpty; // Oyun tahtasını oluştur
+    this.board = Object.assign([[]],this.gridBoardEmpty); // Oyun tahtasını oluştur
     this.randomBoardReadonly=this.CreateRandomBoardReadonly();
     this.gridCreatedFull=this.CreateRandomBoard();
 
 
   }
+  GridPrintBoardNow(row:any,col:any,WhichArray:number):string{
+    let result ="";
+    if(WhichArray==0){
+      result = this.board[row][col]
+    }
+    else{
+      result = this.gridCreatedFull[row][col]
+    }
+    return result;
+  }
 
   GridFill(elm:any,numRow:number,numCol:number):void{
+    console.log(elm);
+
+
+
+    this.board[numRow][numCol]=elm// Örnek bir sayı ekleme
+    console.log("numRow:"+numRow+" numCol:"+numCol+" value:"+elm+"--- readonly:"+elm.readOnly);
     console.log(this.board);
-    this.board[numRow][numCol]=elm.value // Örnek bir sayı ekleme
   }
 
   /* Burada Koşul Değerimi Doğruluyorum */
@@ -132,7 +146,7 @@ export class HomePage {
 
   // Oyun tahtasını sıfırlama
   resetBoard() {
-    this.board = this.gridBoardEmpty; // Oyun tahtasını oluştur
+    this.board = Object.assign([],this.gridBoardEmpty); // Oyun tahtasını oluştur
     this.randomBoardReadonly=this.CreateRandomBoardReadonly();
     this.gridCreatedFull=this.CreateRandomBoard();
   }
